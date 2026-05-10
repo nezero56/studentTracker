@@ -28,4 +28,38 @@ taskForm.addEventListener("submit", function (e) {
     name: taskName,
     date: dueDate,
   };
-  
+
+   addTaskToUI(task);
+  saveTask(task);
+
+  // Clear inputs
+  taskInput.value = "";
+  dateInput.value = "";
+});
+
+// Add task to screen
+function addTaskToUI(task) {
+
+  const taskCard = document.createElement("div");
+
+  taskCard.className =
+    "bg-white p-5 rounded-xl shadow-md";
+
+  taskCard.setAttribute("data-id", task.id);
+
+  taskCard.innerHTML = `
+    <h3 class="text-xl font-semibold text-gray-800">
+      ${task.name}
+    </h3>
+
+    <p class="text-gray-600 mt-2">
+      Due Date: ${task.date}
+    </p>
+
+    <button
+      class="deleteBtn mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg"
+    >
+      Delete
+    </button>
+  `;
+ 
