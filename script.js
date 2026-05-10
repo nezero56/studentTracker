@@ -62,4 +62,43 @@ function addTaskToUI(task) {
       Delete
     </button>
   `;
+
+  taskContainer.appendChild(taskCard);
+
+  // Delete task
+  taskCard.querySelector(".deleteBtn").addEventListener("click", () => {
+    taskCard.remove();
+    deleteTask(task.id);
+  });
+}
+
+// Save task to Local Storage
+function saveTask(task) {
+
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  tasks.push(task);
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+// Load tasks from Local Storage
+function loadTasks() {
+
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  tasks.forEach(task => {
+    addTaskToUI(task);
+  });
+}
+
+// Delete task from Local Storage
+function deleteTask(id) {
+
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  tasks = tasks.filter(task => task.id !== id);
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
  
